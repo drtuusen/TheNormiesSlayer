@@ -1,9 +1,13 @@
 import discord
 import asyncio
 import time
+import math
         
 client = discord.Client()
-        
+
+aleph=[]
+
+
 @client.event
 async def on_ready():
     print('Logged in as')
@@ -24,12 +28,32 @@ async def on_message(message):
     zb = client.get_channel("491317478178422784")
     b = client.get_server("296384240331784212")
     role = discord.utils.get(b.roles, name="Jeunes Ames Vierges")
+    zeta=discord.utils.get(b.roles, name="Théoriciens Du Grand Zbeul")
+    teta=discord.utils.get(b.roles, name="Grand philosophe des égouts")
     new = discord.utils.get(b.roles, name="Déchets Confirmés")
     if "Je confirme avoir pris connaissance des conditions d'utilisation et de confidentialité, je les accepte et m'engage à les respecter" in message.content and message.author.id!="491274495986761729" and role in message.author.roles:
         await client.send_message(message.channel, "<@" + message.author.id + ">" + "(ID:" + message.author.id + ") " +"Inscription validée le: " + time.strftime("%A %d %B %Y %H:%M:%S"))
         await client.remove_roles(message.author, role)
         await client.add_roles(message.author, new)
         await client.send_message(zb, "@everyone, dites coucou à " + "<@" + message.author.id + ">. " + "Il vient de rejoindre le niveau -7 de l'enfer !") 
+    if message.content[0:5]=="!time" and ((teta in message.author.roles) or (zeta in message.author.roles)):
+        po=message.content[6:len(message.content)]
+        await client.send_message(message.channel, "<@"+ po + ">" + " Doit accepter les condtions sous 3 jours sous peine de ban.")
+        aleph.append([po,time.time()])
+    if message.content=="!check" and ((teta in message.author.roles) or (zeta in message.author.roles)):
+        for k in aleph:
+            if time.time() >= k[1] + 259200:
+                ixde=b.get_member(k[0])
+                await client.send_message(message.channel, "<@"+k[0]+">" + " (A été Kick).")
+                await client.kick(ixde)
+            else:
+                caca= k[1] + 259200 - time.time()
+                caca= caca/3600
+                caca= math.floor(caca)
+                caca = str(caca)
+                await client.send_message(message.channel, "<@"+k[0]+">" + " " +  caca + " heures.")
+        await client.send_message(message.channel, "Check terminer.")
+            
         
         
     
