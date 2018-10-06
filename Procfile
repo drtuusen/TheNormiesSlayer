@@ -1,1 +1,1 @@
-worker: python zbeul.py
+worker: python dalet.py
