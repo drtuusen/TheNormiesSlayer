@@ -1,1 +1,1 @@
-worker: python normies.py
+worker: python zbeul.py
