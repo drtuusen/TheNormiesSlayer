@@ -43,19 +43,22 @@ async def on_message(message):
     if message.content=="!check" and ((teta in message.author.roles) or (zeta in message.author.roles)):
         for k in aleph:
             ixde=b.get_member(k[0])
-            if (time.time() >= k[1] + 50400) and (role in ixde.roles):
+            if (time.time() >= k[1] + 18600) and (role in ixde.roles):
                 await client.send_message(message.channel, "<@"+k[0]+">" + " (A été Kick).")
-                await client.kick(ixde)
+                await client.ban(ixde)
             else:
-                caca= k[1] + 50400 - time.time()
+                caca= k[1] + 18600 - time.time()
                 caca= caca/3600
-                caca= math.floor(caca)
+                caca= round(caca,3)
                 caca = str(caca)
                 await client.send_message(message.channel, "<@"+k[0]+">" + " " +  caca + " heures.")
         await client.send_message(message.channel, "Check terminer.")
-            
+    if message.content[0:4]=="!ban":
+        mem=b.get_member(message.content[5:len(message.content)])
+        await client.send_message(mem, "U got banned: "+"http://moe-desu.com/Original/Images/Error.jpg")
         
         
-    
+        
+        
                 
 client.run("NDkxMjc0NDk1OTg2NzYxNzI5.DoFmdw.XRUyZ4BiEQpFZBtY9PoR2MxF0-c")
