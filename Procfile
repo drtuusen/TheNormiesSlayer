@@ -1,1 +1,1 @@
-worker: python dalet.py
+worker: python sky.py
